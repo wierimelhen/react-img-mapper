@@ -28,6 +28,7 @@ export const ImageMapperDefaultProps: Partial<ImageMapperProps> = {
   containerRef: null,
   active: true,
   disabled: false,
+  createMode: false,
   fillColor: 'rgba(255, 255, 255, 0.5)',
   strokeColor: 'rgba(0, 0, 0, 0.5)',
   lineWidth: 1,

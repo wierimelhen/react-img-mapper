@@ -21,6 +21,7 @@ const ImageMapper: React.FC<ImageMapperProps> = (props: ImageMapperProps) => {
     containerRef,
     active,
     disabled,
+    createMode,
     fillColor: fillColorProp,
     lineWidth: lineWidthProp,
     map: mapProp,
@@ -179,18 +180,33 @@ const ImageMapper: React.FC<ImageMapperProps> = (props: ImageMapperProps) => {
     ctx.current.clearRect(0, 0, canvas.current.width, canvas.current.height);
 
   const hoverOn = (area: CustomArea, index?: number, event?: AreaEvent) => {
-    if (active) highlightArea(area);
+
+    if(createMode) {
+      map.areas.forEach(area => {
+        callingFn(
+          area.shape,
+          scaleCoords(area.coords),
+          area.preFillColor,
+          area.lineWidth || lineWidthProp,
+          area.strokeColor || strokeColorProp,
+          true,
+          ctx
+        );
+      });
+    } else if (active) highlightArea(area);
 
     if (onMouseEnter) onMouseEnter(area, index, event);
   };
 
   const hoverOff = (area: CustomArea, index: number, event: AreaEvent) => {
-    if (active) {
-      clearCanvas();
-      renderPrefilledAreas();
-    }
 
-    if (onMouseLeave) onMouseLeave(area, index, event);
+    console.log('--hoverOff--')
+    // if (active) {
+    //   clearCanvas();
+    //   renderPrefilledAreas();
+    // }
+
+    // if (onMouseLeave) onMouseLeave(area, index, event);
   };
 
   const click = (area: CustomArea, index: number, event: AreaEvent) => {

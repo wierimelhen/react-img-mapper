@@ -39,6 +39,7 @@ export interface ImageMapperProps {
   containerRef?: { current: HTMLDivElement } | null;
   active?: boolean;
   disabled?: boolean;
+  createMode?: boolean;
   fillColor?: string;
   strokeColor?: string;
   lineWidth?: number;
